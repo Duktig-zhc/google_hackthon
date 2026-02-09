@@ -888,8 +888,8 @@ const App: React.FC = () => {
              <div className="absolute inset-0 bg-blue-400 rounded-[2rem] blur opacity-0 group-hover:opacity-40 transition-opacity duration-500"></div>
              <Activity size={48} className="text-white relative z-10" />
            </div>
-           <h2 className="text-4xl font-black mb-3 text-white uppercase italic tracking-tighter">Twin-City OS</h2>
-           <p className="text-white/40 mb-12 text-sm font-mono">Neural Urban Digital Twin Interface v2.0</p>
+           <h2 className="text-4xl font-black mb-3 text-white uppercase italic tracking-tighter">Atlas Axis</h2>
+           <p className="text-white/40 mb-12 text-sm font-mono">Redefining Urban Living through the Chicago Machine Economy</p>
            <div className="space-y-4">
             {MOCK_ACCOUNTS.map((account) => (
               <button key={account.email} onClick={() => handleLoginStart(account)} className="w-full p-4 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 hover:scale-[1.02] transition-all text-white flex items-center gap-5 group">
@@ -898,6 +898,7 @@ const App: React.FC = () => {
                 </div>
                 <div className="text-left">
                     <span className="font-bold block text-lg">{account.name}</span>
+                    <span className="text-[10px] text-blue-400/60 font-mono block mb-1">{account.email}</span>
                     <span className="text-xs text-white/40 uppercase tracking-widest">{account.role}</span>
                 </div>
                 <ChevronRight className="ml-auto text-white/20 group-hover:text-white group-hover:translate-x-1 transition-all" />
