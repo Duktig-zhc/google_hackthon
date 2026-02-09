@@ -47,6 +47,59 @@ interface DifyIntentResult {
   keywords: string;
   confidence: number;
 }
+// --- MOCK DATA FOR MACHINE ECONOMY ---
+const MOCK_AGENT_ACTIVITIES = [
+  "SYSTEM_EVENT: New Tenant detected. Welcome to the Loop, Tom Jenkins! 🏙️",
+  "REPUTATION_STEWARD: On-chain identity 'did:twin:usr:tom-jenkins' verified. Trust Score: 788.",
+  "SAFETY_SENTINEL: Scanning Loop District... No anomalies detected in Sector 7.",
+  "INFRA_JANITOR: IoT Sensor #882 reporting low latency. Fiber node optimized.",
+  "TENANT_CONCIERGE: Neighborhood orientation packet sent to user Tom Jenkins.",
+  "MERCHANT_PULSE: Millennium Park area reporting 85% commercial vitality.",
+  "COMMUNITY_GOVERNANCE: Welcome event for new residents scheduled for Friday."
+];
+
+const MOCK_COMMUNITY_POSTS = [
+  {
+    id: 1,
+    sender: "SYSTEM_CORE",
+    text: "Welcome our newest citizen, Tom Jenkins, to the Chicago Loop digital twin community! 🥂 We've synchronized your neural DID with the local mesh.",
+    timestamp: "2 mins ago",
+    tag: "NEW_RESIDENT",
+    icon: <UserCheck size={18} className="text-emerald-400" />
+  },
+  {
+    id: 2,
+    sender: "SAFETY_SENTINEL",
+    text: "Night-time safety protocols updated for the Michigan Ave residential cluster. All emergency paths verified for new residents.",
+    timestamp: "15 mins ago",
+    tag: "SAFETY",
+    icon: <ShieldCheck size={18} className="text-blue-400" />
+  },
+  {
+    id: 3,
+    sender: "MERCHANT_PULSE",
+    text: "Special welcome offer: 15% discount at 'Loop Coffee' for all verified digital twin residents for the next 4 hours!",
+    timestamp: "1 hour ago",
+    tag: "DEALS",
+    icon: <Zap size={18} className="text-amber-400" />
+  }
+];
+
+// --- SCROLLER COMPONENT ---
+const AgentActivityScroller = () => (
+  <div className="w-full h-9 bg-blue-600/10 border-y border-white/5 overflow-hidden flex items-center relative backdrop-blur-xl">
+    <div className="flex whitespace-nowrap animate-scroll-text gap-16 items-center">
+      {[...MOCK_AGENT_ACTIVITIES, ...MOCK_AGENT_ACTIVITIES].map((text, i) => (
+        <div key={i} className="flex items-center gap-3">
+          <div className="w-1 h-1 bg-blue-400 rounded-full animate-pulse shadow-[0_0_8px_#60a5fa]" />
+          <span className="text-[10px] font-mono text-blue-100/60 uppercase tracking-[0.2em] font-medium">
+            {text}
+          </span>
+        </div>
+      ))}
+    </div>
+  </div>
+);
 
 // --- API 调用函数 ---
 const callDifyApi = async (query: string, apiKey: string, url: string) => {
@@ -464,7 +517,55 @@ type NavTab = 'HOME' | 'SYSTEM' | 'COMMUNITY';
 const MOCK_ACCOUNTS = [
   { email: 'alex.landlord@gmail.com', name: 'Alex Rivera', role: 'Landlord' as UserRole, avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Alex', eigenCreditScore: 842 },
   { email: 'maria.merchant@gmail.com', name: 'Maria Chen', role: 'Merchant' as UserRole, avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Maria', eigenCreditScore: 915 },
-  { email: 'tom.tenant@gmail.com', name: 'Tom Jenkins', role: 'Tenant' as UserRole, avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Tom', eigenCreditScore: 788 }
+  { email: 'tom.tenant@gmail.com', name: 'Tom Jenkins', role: 'Tenant' as UserRole, avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Tom', eigenCreditScore: 788 },
+  // 1. 安全哨兵 (Safety Sentinel) - 负责 3D 空间安全扫描
+  { 
+    email: 'safety.sentinel@atlas.axis', 
+    name: 'Safety Sentinel', 
+    role: 'Security Agent' as UserRole, 
+    avatar: 'https://api.dicebear.com/7.x/bottts/svg?seed=Safety', 
+    eigenCreditScore: 999,
+    address: '0xSEC_8821_LOOP_001',
+    balance: '500.0 ETH (Treasury)',
+    desc: 'Neural grid overseer. Analyzing 3D city geometry for real-time safety and optimal pathing for residents.'
+  },
+
+  // 2. 基础设施巡检员 (Infra Janitor) - 负责硬件与 IoT 节点维护
+  { 
+    email: 'infra.janitor@atlas.axis', 
+    name: 'Infra Janitor', 
+    role: 'Maintenance Agent' as UserRole, 
+    avatar: 'https://api.dicebear.com/7.x/bottts/svg?seed=Janitor', 
+    eigenCreditScore: 980,
+    address: '0xINF_5531_MICH_882',
+    balance: '120.5 ETH (Ops)',
+    desc: 'Autonomous infrastructure repair. Monitoring IoT sensors, Wi-Fi nodes, and automated repair drone dispatch.'
+  },
+
+  // 3. 信用管家 (Reputation Steward) - 负责 Web3 身份与信用同步
+  { 
+    email: 'reputation.steward@atlas.axis', 
+    name: 'Reputation Steward', 
+    role: 'Credit Agent' as UserRole, 
+    avatar: 'https://api.dicebear.com/7.x/bottts/svg?seed=Reputation', 
+    eigenCreditScore: 1000,
+    address: '0xREP_9920_DID_992',
+    balance: '25.0 ETH (Trust)',
+    desc: 'On-chain identity validator. Synchronizing neural DIDs with EigenLayer scores for collateral-free renting.'
+  },
+
+  // 4. 结算协调员 (Settlement Mediator) - 负责机器经济中的交易执行
+  { 
+    email: 'settlement.mediator@atlas.axis', 
+    name: 'Settlement Mediator', 
+    role: 'Financial Agent' as UserRole, 
+    avatar: 'https://api.dicebear.com/7.x/bottts/svg?seed=Settlement', 
+    eigenCreditScore: 995,
+    address: '0xPAY_4021_ESCROW_402',
+    balance: '8,400.0 ETH (Escrow)',
+    desc: 'Smart contract executor. Automating M2M (Machine-to-Machine) lease payments and automated security deposits.'
+  }
+];
 ];
 
 const INITIAL_AGENT_MESSAGES = [
@@ -945,17 +1046,19 @@ const App: React.FC = () => {
       <main className="flex-1 relative flex flex-col overflow-hidden">
         {activeTab === 'HOME' && (
           <div className="absolute inset-0 z-0 animate-in fade-in duration-500">
-            <TwinCityMap onBuildingClick={handleBuildingSelect} overlayType={mapOverlay} highlightedIds={highlightedBuildings} groundedPoints={groundedPoints} />
+            <TwinCityMap onBuildingClick={handleBuildingSelect} highlightedIds={highlightedBuildings} groundedPoints={groundedPoints} />
             
-            <div className="absolute top-8 left-8 right-8 z-40 flex justify-between pointer-events-none">
-              <div className="glass-panel p-5 rounded-[2rem] border border-white/10 flex items-center gap-6 pointer-events-auto shadow-2xl backdrop-blur-xl">
-                <div className="flex flex-col">
-                  <span className="text-[10px] font-black tracking-[0.3em] text-blue-400 uppercase mb-1">Status</span>
-                  <div className="flex items-center gap-2">
-                     <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                     <span className="text-sm font-bold text-white">Neural_Grid_Active</span>
+            {/* 右上角 Agent 滚动条 */}
+            <div className="absolute top-8 right-8 w-96 z-40 pointer-events-none space-y-4 animate-in slide-in-from-right-8 duration-700">
+              <div className="rounded-2xl overflow-hidden border border-white/10 shadow-[0_0_50px_rgba(0,0,0,0.8)] backdrop-blur-2xl bg-black/40">
+                <div className="bg-blue-600/80 px-3 py-1.5 flex justify-between items-center border-b border-white/10">
+                  <span className="text-[9px] font-black text-white uppercase tracking-[0.3em] italic">Agent_Neural_Stream</span>
+                  <div className="flex gap-1.5">
+                    <div className="w-1 h-1 bg-white/40 rounded-full" />
+                    <div className="w-1 h-1 bg-white/40 rounded-full" />
                   </div>
                 </div>
+                <AgentActivityScroller />
               </div>
             </div>
             
@@ -964,8 +1067,142 @@ const App: React.FC = () => {
             </div>
           </div>
         )}
-        {activeTab === 'SYSTEM' && <div className="text-white p-10 flex items-center justify-center h-full text-2xl font-mono text-white/20">System Dashboard Placeholder</div>}
-        {activeTab === 'COMMUNITY' && <div className="text-white p-10 flex items-center justify-center h-full text-2xl font-mono text-white/20">Community Feed Placeholder</div>}
+        {activeTab === 'SYSTEM' && (
+          <div className="flex-1 flex flex-col bg-[#020617] animate-in fade-in duration-500 overflow-y-auto custom-scrollbar">
+            {/* 顶部滚动简讯 */}
+            <div className="sticky top-0 z-20">
+              <AgentActivityScroller />
+            </div>
+            
+            <div className="p-10 max-w-6xl mx-auto w-full">
+              {/* 仪表盘头部 */}
+              <div className="flex items-center justify-between mb-10 border-b border-white/5 pb-6">
+                <div>
+                  <h2 className="text-3xl font-black text-white italic tracking-tighter uppercase mb-2">Neural_Grid_Governance</h2>
+                  <p className="text-[10px] text-purple-400 font-mono tracking-[0.3em] uppercase">Active Autonomous Agent Fleet Monitoring</p>
+                </div>
+                <div className="text-right">
+                  <div className="text-[10px] text-white/30 font-mono mb-1 uppercase">Total Network TVL (Treasury)</div>
+                  <div className="text-xl font-black text-white font-mono tracking-tighter">9,045.5 ETH</div>
+                </div>
+              </div>
+        
+              {/* Agent 状态网格：从 MOCK_ACCOUNTS 中筛选系统角色 */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {MOCK_ACCOUNTS.filter(acc => acc.role.includes('Agent')).map((agent) => (
+                  <div key={agent.email} className="glass-panel p-6 rounded-[2.5rem] border border-white/5 hover:border-purple-500/30 transition-all group relative overflow-hidden bg-black/40">
+                    {/* 背景装饰光效 */}
+                    <div className="absolute top-0 right-0 w-32 h-32 bg-purple-500/5 blur-[50px] group-hover:bg-purple-500/10 transition-colors" />
+                    
+                    <div className="flex items-start gap-6 relative z-10">
+                      {/* Agent 头像/图标 */}
+                      <div className="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center group-hover:border-purple-500/50 transition-colors shrink-0">
+                        <img src={agent.avatar} alt={agent.name} className="w-12 h-12" />
+                      </div>
+                      
+                      <div className="flex-1 min-w-0">
+                        <div className="flex justify-between items-start mb-2">
+                          <div>
+                            <h3 className="text-lg font-bold text-white uppercase tracking-tight">{agent.name}</h3>
+                            <p className="text-[9px] text-purple-400 font-mono uppercase font-black">{agent.role}</p>
+                          </div>
+                          <span className="text-[9px] px-2 py-1 rounded bg-white/5 text-white/40 font-mono border border-white/10">
+                            {agent.address.slice(0, 12)}...
+                          </span>
+                        </div>
+                        
+                        {/* 机器经济描述 */}
+                        <p className="text-[10px] text-white/40 font-mono mb-6 leading-relaxed uppercase italic">
+                           &gt; {agent.desc}
+                        </p>
+        
+                        {/* 核心经济指标 */}
+                        <div className="grid grid-cols-2 gap-4">
+                          <div className="bg-white/2 p-3 rounded-2xl border border-white/5 group-hover:bg-white/5 transition-colors">
+                            <span className="text-[8px] text-white/30 uppercase block mb-1 tracking-widest font-black">Account Balance</span>
+                            <span className="text-sm font-bold text-emerald-400 font-mono">{agent.balance.split(' ')[0]} <span className="text-[9px] opacity-60">ETH</span></span>
+                          </div>
+                          <div className="bg-white/2 p-3 rounded-2xl border border-white/5 group-hover:bg-white/5 transition-colors">
+                            <span className="text-[8px] text-white/30 uppercase block mb-1 tracking-widest font-black">Reputation Score</span>
+                            <span className="text-sm font-bold text-blue-400 font-mono">{agent.eigenCreditScore}</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+        
+                    {/* 底部神经同步进度条 */}
+                    <div className="mt-8 pt-4 border-t border-white/5">
+                      <div className="flex justify-between text-[8px] text-white/20 font-mono mb-2 uppercase tracking-[0.2em]">
+                        <span>Neural_Sync_Integrity</span>
+                        <span className="text-purple-400 animate-pulse">99.9% Online</span>
+                      </div>
+                      <div className="h-1 bg-white/5 rounded-full overflow-hidden">
+                        <div className="h-full bg-purple-600/60 w-[99.9%] group-hover:bg-purple-400 transition-all duration-1000" />
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+        {activeTab === 'COMMUNITY' && (
+          <div className="flex-1 flex flex-col bg-[#020617] animate-in slide-in-from-bottom-4 duration-500 overflow-y-auto custom-scrollbar relative">
+            {/* 页面顶端：全屏宽度的实时 Agent 简讯滚动条 */}
+            <div className="sticky top-0 z-20">
+                <AgentActivityScroller />
+            </div>
+            
+            <div className="flex-1 p-10 max-w-2xl mx-auto w-full space-y-8 py-16">
+              {/* 社区标题头部 */}
+              <div className="flex items-center justify-between mb-12 border-b border-white/5 pb-6">
+                <div>
+                    <h2 className="text-4xl font-black text-white italic tracking-tighter uppercase mb-2">Community_Pulse</h2>
+                    <p className="text-[10px] text-white/30 font-mono tracking-widest uppercase">Global Node: CHICAGO_LOOP_NW_01</p>
+                </div>
+                <div className="px-4 py-2 bg-emerald-500/10 border border-emerald-500/20 rounded-2xl text-[10px] text-emerald-400 font-mono flex items-center gap-2">
+                  <div className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse" />
+                  LIVE_NETWORK_ACTIVE
+                </div>
+              </div>
+        
+              {/* 循环渲染 Mock 社区动态 */}
+              {MOCK_COMMUNITY_POSTS.map(post => (
+                <div key={post.id} className="glass-panel p-8 rounded-[2.5rem] border border-white/5 hover:border-blue-500/20 transition-all group relative overflow-hidden">
+                  {/* 背景装饰光效 */}
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/5 blur-[50px] group-hover:bg-blue-500/10 transition-colors" />
+                  
+                  <div className="flex justify-between items-start mb-6">
+                    <div className="flex items-center gap-4">
+                      {/* Agent 图标容器 */}
+                      <div className="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center border border-white/10 group-hover:border-blue-400/30 transition-colors">
+                        {post.icon}
+                      </div>
+                      <div>
+                        <h4 className="text-sm font-bold text-white uppercase tracking-widest group-hover:text-blue-400 transition-colors">{post.sender}</h4>
+                        <p className="text-[10px] text-white/20 font-mono uppercase">{post.timestamp}</p>
+                      </div>
+                    </div>
+                    {/* 标签 */}
+                    <span className="text-[9px] bg-blue-500/10 px-3 py-1 rounded-full text-blue-400 font-black tracking-tighter">#{post.tag}</span>
+                  </div>
+                  
+                  {/* 消息正文 */}
+                  <p className="text-sm text-white/70 leading-relaxed font-mono italic pl-4 border-l-2 border-white/5 group-hover:border-blue-500/40 transition-all">
+                    {post.text}
+                  </p>
+                </div>
+              ))}
+        
+              {/* 底部装饰，提示留学生当前节点位置 */}
+              <div className="pt-10 text-center">
+                 <div className="inline-block px-6 py-2 rounded-full bg-white/5 border border-white/10">
+                    <span className="text-[9px] text-white/20 font-mono tracking-[0.5em] uppercase">End of Encrypted Transmission</span>
+                 </div>
+              </div>
+            </div>
+          </div>
+        )}
       </main>
 
       {/* Profile Modal */}
@@ -1238,6 +1475,19 @@ const App: React.FC = () => {
         .custom-scrollbar::-webkit-scrollbar { width: 4px; }
         .custom-scrollbar::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); }
         .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 2px; }
+        @keyframes scroll-text {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+        
+        .animate-scroll-text {
+          animation: scroll-text 45s linear infinite;
+        }
+        
+        /* 隐藏滚动条 */
+        .custom-scrollbar::-webkit-scrollbar {
+          display: none;
+        }
       `}</style>
     </div>
   );
