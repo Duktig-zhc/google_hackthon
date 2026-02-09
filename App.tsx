@@ -739,12 +739,27 @@ const App: React.FC = () => {
     if (view !== 'SIMULATION') return;
     const interval = setInterval(() => {
       const AGENT_POOL = [
-        { agentId: AgentType.SAFETY_SENTINEL, text: "Safety Patrol Node 04: 检测到行人流量异常，已切换为防御扫描模式。" },
-        { agentId: AgentType.INFRA_JANITOR, text: "WiFi 节点 #88A 维护中。周边用户已自动切回 5G 冗余链路。" },
-        { agentId: AgentType.REPUTATION_STEWARD, text: "检测到新的链上租约（#Lease-9902），正在核算信用增量。" },
-        { agentId: AgentType.MERCHANT_PULSE, text: "Millennium Park 附近商圈活力指数（Traffic Index）上升至 88%。" },
-        { agentId: AgentType.CITY_CORE, text: "城市核心：检测到多位新市民进入 Loop 区域，正在同步空间权限。" },
-      ];
+                          { 
+                            agentId: AgentType.SAFETY_SENTINEL, 
+                            text: "Safety Patrol Node 04: Anomalous pedestrian flow detected. Switching to Defensive Scan Mode." 
+                          },
+                          { 
+                            agentId: AgentType.INFRA_JANITOR, 
+                            text: "WiFi Node #88A under maintenance. Peripheral users automatically rerouted to 5G redundancy link." 
+                          },
+                          { 
+                            agentId: AgentType.REPUTATION_STEWARD, 
+                            text: "New on-chain lease detected (#Lease-9902). Calculating reputation credit increment." 
+                          },
+                          { 
+                            agentId: AgentType.MERCHANT_PULSE, 
+                            text: "Commercial Vitality Index near Millennium Park increased to 88%." 
+                          },
+                          { 
+                            agentId: AgentType.CITY_CORE, 
+                            text: "City Core: Multiple new citizens detected in Loop area. Synchronizing spatial permissions." 
+                          },
+                        ];
       const randomMsg = AGENT_POOL[Math.floor(Math.random() * AGENT_POOL.length)];
       const newPost = {
         ...randomMsg,
@@ -799,7 +814,7 @@ const App: React.FC = () => {
       return;
     }
     try {
-      const routerResult = await callDifyApi(text, DIFY_ROUTER_API_KEY, DIFY_ROUTER_API_URL);
+      const routerResult = await callDifyApi(text, VITE_DIFY_ROUTER_API_KEY, VITE_DIFY_ROUTER_API_URL);
       let parsedIntent: DifyIntentResult | null = null;
       if (routerResult && routerResult.answer) {
         try {
@@ -842,7 +857,7 @@ const App: React.FC = () => {
         const coreResponse: Message = {
           id: Date.now().toString(),
           sender: AgentType.CITY_CORE,
-          text: "[Neo-Chicago Core]: 明白。正在扫描可用房源。在寻找理想住处时，你更看重哪一点？\n1. 安全保障（我会调动 Safety Sentinel 进行路径分析）\n2. 社交便利（我会调动 Merchant Pulse 推荐活力商圈）",
+          text: "[Neo-Chicago Core]: Understood. Scanning available listings. What is your primary priority for an ideal residence? 1. Safety & Security (Deploying Safety Sentinel for path analysis) 2. Social Vitality (Deploying Merchant Pulse for district recommendations)",
           timestamp: new Date()
         };
         setTimeout(() => {
@@ -857,8 +872,8 @@ const App: React.FC = () => {
 
       // 商户相关问题 → 走你提供的 Dify Merchant Agent（streaming）
       if (predictedAgent === AgentType.MERCHANT_PULSE) {
-        const merchantAnswer = await callDifyMerchantStream(text, DIFY_MERCHANT_API_KEY, DIFY_MERCHANT_API_URL);
-        const displayText = merchantAnswer.trim() || "Merchant Pulse 连接异常，请稍后重试。";
+        const merchantAnswer = await callDifyMerchantStream(text, VITE_DIFY_MERCHANT_API_KEY, VITE_DIFY_MERCHANT_API_URL);
+        const displayText = merchantAnswer.trim() || "Merchant Pulse connection error. Please try again later.";
         const newMsg: Message = {
           id: Date.now().toString(),
           sender: AgentType.MERCHANT_PULSE,
@@ -887,7 +902,7 @@ const App: React.FC = () => {
       setMessages(prev => [...prev, {
         id: Date.now().toString(),
         sender: AgentType.CITY_CORE,
-        text: "系统暂时繁忙，请稍后再试。",
+        text: "System is temporarily busy. Please try again later.",
         timestamp: new Date()
       }]);
     } finally {
@@ -916,14 +931,14 @@ const App: React.FC = () => {
     const query = `获取点位详情: ${JSON.stringify(pointInfo)}`;
     setIsTyping(true);
     try {
-      const difyResult = await callDifyWorkflowApi(query, DIFY_WORKFLOW_API_KEY, DIFY_WORKFLOW_API_URL);
+      const difyResult = await callDifyWorkflowApi(query, VITE_DIFY_WORKFLOW_API_KEY, VITE_DIFY_WORKFLOW_API_URL);
       const aiMsg: Message = {
         id: Date.now().toString(),
         sender: AgentType.SPATIAL_ARCHITECT,
-        text: `[Spatial Architect]: 已获取 "${pointInfo.label}" 的详细信息\n\n正在为您加载空间拓扑数据...`,
+        text: `[Spatial Architect]: Successfully retrieved details for "${pointInfo.label}".\n\nLoading spatial topology data...`,
         timestamp: new Date(),
         metadata: {
-          difyResponse: difyResult?.answer || difyResult?.outputs?.result || '数据加载中...',
+          difyResponse: difyResult?.answer || difyResult?.outputs?.result || 'loading...',
           lumalabsUrl: 'https://lumalabs.ai/capture/0fd66136-b18e-4389-a99c-092acaeeb1d4'
         }
       };
@@ -937,7 +952,7 @@ const App: React.FC = () => {
       setMessages(prev => [...prev, {
         id: Date.now().toString(),
         sender: AgentType.CITY_CORE,
-        text: '抱歉，获取详细信息时出现了错误，请稍后重试。',
+        text: 'Sorry, an error occurred while fetching details. Please try again later.',
         timestamp: new Date()
       }]);
     } finally {
