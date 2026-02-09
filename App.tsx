@@ -21,10 +21,10 @@ import { generateOrchestratedResponse, detectAgentIntent } from './services/gemi
 
 // --- API 配置区域 ---
 const DIFY_ROUTER_API_URL = "https://api.dify.ai/v1/chat-messages"; 
-const DIFY_ROUTER_API_KEY = "app-6aG838IxXLdSFQT5pkNxgFXx"; 
+const DIFY_ROUTER_API_KEY = ""; 
 const DIFY_WORKFLOW_API_URL = "https://api.dify.ai/v1/chat-messages"; 
-const DIFY_WORKFLOW_API_KEY = "app-eJf7ei2wfBj8S6tkMn5HgkBA"; 
-const GOOGLE_MAPS_API_KEY = "AIzaSyCqNCADvhoq7tiIjLMPG8Avv2FNnkkJYHk"; 
+const DIFY_WORKFLOW_API_KEY = ""; 
+const GOOGLE_MAPS_API_KEY = ""; 
 
 interface DifyIntentResult {
   intent: string;
