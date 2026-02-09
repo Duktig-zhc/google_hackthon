@@ -54,8 +54,8 @@ const ORCHESTRATOR_SYSTEM_INSTRUCTION = `
 
 export const generateOrchestratedResponse = async (message: string) => {
   // Always create a new GoogleGenAI instance right before making an API call to ensure it uses the most up-to-date API key.
-  const apiKey = import.meta.env.VITE_GEMINI_API_KEY || "";
-  const ai = new GoogleGenAI(apiKey);
+const apiKey = import.meta.env.VITE_GEMINI_API_KEY || "";
+const ai = new GoogleGenAI(apiKey);
   try {
     const response: GenerateContentResponse = await withRetry(() => 
       ai.models.generateContent({
@@ -95,8 +95,8 @@ export const generateOrchestratedResponse = async (message: string) => {
 
 export const detectAgentIntent = async (prompt: string): Promise<AgentType> => {
   // Always create a new GoogleGenAI instance right before making an API call to ensure it uses the most up-to-date API key.
-  const apiKey = import.meta.env.VITE_GEMINI_API_KEY || "";
-  const ai = new GoogleGenAI(apiKey);
+const apiKey = import.meta.env.VITE_GEMINI_API_KEY || "";
+const ai = new GoogleGenAI(apiKey);
   try {
     const response: GenerateContentResponse = await withRetry(() => 
       ai.models.generateContent({
