@@ -724,7 +724,7 @@ const App: React.FC = () => {
         const welcomeMsg: Message = {
           id: 'welcome-001',
           sender: AgentType.CITY_CORE,
-          text: `你好，${user.name}。我是 Neo-Chicago Core。你的数字孪生身份已激活，欢迎访问芝加哥 Loop 智慧社区。\n\n检测到你是以 ${user.role} 身份进入系统。有什么我可以帮你的？比如：寻找 Loop 区最安全的公寓、查看商圈活力，或者管理你的链上信用？`,
+          text: `Hello, ${user.name}. I am Neo-Chicago Core. Your digital twin identity is active. Welcome to the Loop Smart Community.\n\nYou have entered as a ${user.role}. How can I assist you today? For example, I can help you find the safest apartments in the Loop, analyze commercial vitality, or manage your on-chain credit.`,
           timestamp: new Date()
         };
         setMessages([welcomeMsg]);
