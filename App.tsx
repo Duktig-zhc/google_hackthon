@@ -25,6 +25,7 @@ const DIFY_ROUTER_API_KEY = "";
 const DIFY_WORKFLOW_API_URL = "https://api.dify.ai/v1/chat-messages"; 
 const DIFY_WORKFLOW_API_KEY = ""; 
 const GOOGLE_MAPS_API_KEY = ""; 
+
 // 商户 Agent 专用 Dify 应用（你提供的 Key）
 const DIFY_MERCHANT_API_URL = "https://api.dify.ai/v1/chat-messages";
 const DIFY_MERCHANT_API_KEY = "";
@@ -36,7 +37,6 @@ interface DifyIntentResult {
 }
 
 // --- API 调用函数 ---
-// 通用 Dify Chat（blocking 模式）
 const callDifyApi = async (query: string, apiKey: string, url: string) => {
   try {
     const response = await fetch(url, {
@@ -119,6 +119,8 @@ const callDifyMerchantStream = async (query: string, apiKey: string, url: string
     return "";
   }
 };
+
+
 
 const callDifyWorkflowApi = async (query: string, apiKey: string, url: string) => {
   try {
@@ -338,7 +340,7 @@ const LumaModal: React.FC<{
   if (!isOpen) return null;
 
   return (
-    <div className="fixed top-8 right-8 bottom-8 left-[520px] z-[100] flex flex-col animate-in fade-in duration-300">
+    <div className="fixed top-8 right-8 bottom-8 left-[600px] z-[100] flex flex-col animate-in fade-in duration-300">
       <div className="glass-panel w-full h-full rounded-[2rem] border border-white/10 overflow-hidden relative shadow-2xl shadow-blue-900/20 flex flex-col bg-black/80">
         
         {/* 顶部栏 */}
@@ -377,7 +379,7 @@ const LumaModal: React.FC<{
             
             <Hotspot 
               position={hotspotPos} 
-              label="查看窗外实景" 
+              label="查看街道实景" 
               isEditMode={isEditMode}
               onClick={() => {
                 console.log("Opening Street View...");
@@ -607,6 +609,7 @@ const App: React.FC = () => {
         }
       }
 
+
       if (discoveryState === 'WELCOME' && (text.includes('租房') || text.includes('rent') || text.includes('apartment'))) {
         setDiscoveryState('PREFERENCES');
         const coreResponse: Message = {
@@ -622,7 +625,6 @@ const App: React.FC = () => {
         return;
       }
       
-      // 默认 Agent 逻辑：先用 Gemini 判断最相关的 Agent
       const predictedAgent = await detectAgentIntent(text);
       setActiveAgent(predictedAgent);
 
@@ -641,7 +643,6 @@ const App: React.FC = () => {
         return;
       }
 
-      // 其他 Agent 仍然走 Gemini 编排
       const { text: fullResponse, grounding } = await generateOrchestratedResponse(text);
       if (grounding?.length > 0) setGroundedPoints(prev => [...prev, ...grounding]);
       const cleanResponse = fullResponse.replace(/<internal_thought>[\s\S]*?<\/internal_thought>/g, '').trim();
