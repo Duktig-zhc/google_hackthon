@@ -53,7 +53,7 @@ const ORCHESTRATOR_SYSTEM_INSTRUCTION = `
 `;
 
 export const generateOrchestratedResponse = async (message: string) => {
-  // Always create a new GoogleGenAI instance right before making an API call to ensure it uses the most up-to-date API key.
+  // You are an urban AI agent. Analyze the user request: "${userText}". ALWAYS respond in English. Provide professional, machine-economy-focused advice...
 const apiKey = import.meta.env.VITE_GEMINI_API_KEY || "";
 const ai = new GoogleGenAI(apiKey);
   try {
