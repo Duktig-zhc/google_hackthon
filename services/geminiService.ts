@@ -101,11 +101,10 @@ const ai = new GoogleGenAI(apiKey);
     const response: GenerateContentResponse = await withRetry(() => 
       ai.models.generateContent({
         model: 'gemini-3-flash-preview',
-        contents: // 建议将 contents 修改为包含英文示例的指令
         contents: `
           You are an intent classifier for Atlas Axis. 
           Analyze the user query: "${prompt}".
-          Return ONLY the ID. 
+          Return ONLY the Agent ID. 
           Example: "find apartment" -> SPATIAL_ARCHITECT
           Example: "is it safe?" -> SAFETY_SENTINEL
         `,
