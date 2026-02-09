@@ -22,15 +22,25 @@ import PointDetailModal from './components/PointDetailModal';
 import { generateOrchestratedResponse, detectAgentIntent } from './services/geminiService';
 
 // --- API 配置区域 ---
-const DIFY_ROUTER_API_URL = "https://api.dify.ai/v1/chat-messages"; 
-const DIFY_ROUTER_API_KEY = ""; 
-const DIFY_WORKFLOW_API_URL = "https://api.dify.ai/v1/chat-messages"; 
-const DIFY_WORKFLOW_API_KEY = ""; 
-const GOOGLE_MAPS_API_KEY = ""; 
+//const DIFY_ROUTER_API_URL = "https://api.dify.ai/v1/chat-messages"; 
+//const DIFY_ROUTER_API_KEY = ""; 
+//const DIFY_WORKFLOW_API_URL = "https://api.dify.ai/v1/chat-messages"; 
+//const DIFY_WORKFLOW_API_KEY = ""; 
+//const GOOGLE_MAPS_API_KEY = ""; 
 
 // 商户 Agent 专用 Dify 应用（你提供的 Key）
-const DIFY_MERCHANT_API_URL = "https://api.dify.ai/v1/chat-messages";
-const DIFY_MERCHANT_API_KEY = "";
+//const DIFY_MERCHANT_API_URL = "https://api.dify.ai/v1/chat-messages";
+//const DIFY_MERCHANT_API_KEY = "";
+const GOOGLE_MAPS_API_KEY = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
+
+const DIFY_ROUTER_API_URL = import.meta.env.VITE_DIFY_ROUTER_API_URL;
+const DIFY_ROUTER_API_KEY = import.meta.env.VITE_DIFY_ROUTER_API_KEY;
+
+const DIFY_WORKFLOW_API_URL = import.meta.env.VITE_DIFY_WORKFLOW_API_URL;
+const DIFY_WORKFLOW_API_KEY = import.meta.env.VITE_DIFY_WORKFLOW_API_KEY;
+
+const DIFY_MERCHANT_API_URL = import.meta.env.VITE_DIFY_MERCHANT_API_URL;
+const DIFY_MERCHANT_API_KEY = import.meta.env.VITE_DIFY_MERCHANT_API_KEY;
 
 interface DifyIntentResult {
   intent: string;
