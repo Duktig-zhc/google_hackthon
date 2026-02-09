@@ -517,54 +517,7 @@ type NavTab = 'HOME' | 'SYSTEM' | 'COMMUNITY';
 const MOCK_ACCOUNTS = [
   { email: 'alex.landlord@gmail.com', name: 'Alex Rivera', role: 'Landlord' as UserRole, avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Alex', eigenCreditScore: 842 },
   { email: 'maria.merchant@gmail.com', name: 'Maria Chen', role: 'Merchant' as UserRole, avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Maria', eigenCreditScore: 915 },
-  { email: 'tom.tenant@gmail.com', name: 'Tom Jenkins', role: 'Tenant' as UserRole, avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Tom', eigenCreditScore: 788 },
-  // 1. 安全哨兵 (Safety Sentinel) - 负责 3D 空间安全扫描
-  { 
-    email: 'safety.sentinel@atlas.axis', 
-    name: 'Safety Sentinel', 
-    role: 'Security Agent' as UserRole, 
-    avatar: 'https://api.dicebear.com/7.x/bottts/svg?seed=Safety', 
-    eigenCreditScore: 999,
-    address: '0xSEC_8821_LOOP_001',
-    balance: '500.0 ETH (Treasury)',
-    desc: 'Neural grid overseer. Analyzing 3D city geometry for real-time safety and optimal pathing for residents.'
-  },
-
-  // 2. 基础设施巡检员 (Infra Janitor) - 负责硬件与 IoT 节点维护
-  { 
-    email: 'infra.janitor@atlas.axis', 
-    name: 'Infra Janitor', 
-    role: 'Maintenance Agent' as UserRole, 
-    avatar: 'https://api.dicebear.com/7.x/bottts/svg?seed=Janitor', 
-    eigenCreditScore: 980,
-    address: '0xINF_5531_MICH_882',
-    balance: '120.5 ETH (Ops)',
-    desc: 'Autonomous infrastructure repair. Monitoring IoT sensors, Wi-Fi nodes, and automated repair drone dispatch.'
-  },
-
-  // 3. 信用管家 (Reputation Steward) - 负责 Web3 身份与信用同步
-  { 
-    email: 'reputation.steward@atlas.axis', 
-    name: 'Reputation Steward', 
-    role: 'Credit Agent' as UserRole, 
-    avatar: 'https://api.dicebear.com/7.x/bottts/svg?seed=Reputation', 
-    eigenCreditScore: 1000,
-    address: '0xREP_9920_DID_992',
-    balance: '25.0 ETH (Trust)',
-    desc: 'On-chain identity validator. Synchronizing neural DIDs with EigenLayer scores for collateral-free renting.'
-  },
-
-  // 4. 结算协调员 (Settlement Mediator) - 负责机器经济中的交易执行
-  { 
-    email: 'settlement.mediator@atlas.axis', 
-    name: 'Settlement Mediator', 
-    role: 'Financial Agent' as UserRole, 
-    avatar: 'https://api.dicebear.com/7.x/bottts/svg?seed=Settlement', 
-    eigenCreditScore: 995,
-    address: '0xPAY_4021_ESCROW_402',
-    balance: '8,400.0 ETH (Escrow)',
-    desc: 'Smart contract executor. Automating M2M (Machine-to-Machine) lease payments and automated security deposits.'
-  }
+  { email: 'tom.tenant@gmail.com', name: 'Tom Jenkins', role: 'Tenant' as UserRole, avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Tom', eigenCreditScore: 788 }
 ];
 
 
