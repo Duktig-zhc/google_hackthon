@@ -566,7 +566,7 @@ const MOCK_ACCOUNTS = [
     desc: 'Smart contract executor. Automating M2M (Machine-to-Machine) lease payments and automated security deposits.'
   }
 ];
-];
+
 
 const INITIAL_AGENT_MESSAGES = [
   { agentId: AgentType.SAFETY_SENTINEL, text: "正在更新安全路径：密歇根大道监控盲点已检测到，建议采用具身重叠路径。" },
