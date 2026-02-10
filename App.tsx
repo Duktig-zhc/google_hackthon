@@ -814,7 +814,10 @@ const App: React.FC = () => {
       return;
     }
     try {
+      console.log("DIFY_ROUTER_API_KEY:",DIFY_ROUTER_API_KEY);
       const routerResult = await callDifyApi(text, DIFY_ROUTER_API_KEY, DIFY_ROUTER_API_URL);
+      
+      
       let parsedIntent: DifyIntentResult | null = null;
       if (routerResult && routerResult.answer) {
         try {
